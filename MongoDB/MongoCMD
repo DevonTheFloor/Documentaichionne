@@ -1,0 +1,82 @@
+mploik@oiujn.kj
+Mot2Passe
+/voir-les-reservations/634e3ecb92a32da9825a8f07
+http://localhost:5173/configurer-ma-boutique/63957afac3f76a9247efcb4f
+mongo
+>
+
+2 83 01 78 158 070 
+sans la clé qui est 88
+Mot de passe 
+200220032005 
+Tu y trouveras d
+https://www.mongodb.com/basics/examples
+
+mongo --port
+show dbs
+use <this db>
+show collections
+db.collections.count()
+db.collections.drop() //efface les collections
+db.dropDatabase() //Removes the current database, deleting the associated data files.
+
+db.maebs.save({"mdp": "Mot2Passe","enseigne": "Jolie Pain","ville": "Chartres","departement": "28","code_postal":"28000","urlImg": "http://urlimage4.png","date": "","email": "villuatr@vous.fr","product":["croissant","pain au chocolat","tartelette"]})
+
+db.meabs.save({
+"mdp" : "Mot2Passe",
+"enseigne" : "Test Prettyt 3",
+"ville" : "Chartres",
+"departement" : "28",
+"code_postal" : "28000",
+"urlImg" : "https://media.gettyimages.com/id/171571202/fr/photo/boulangerie-p%C3%A2tisserie-fran%C3%A7aise.webp?s=2048x2048&w=gi&k=20&c=RWp2UKaZVpkFsmb6n5hhgvyyNtl2py77d2Bl5_O5Chw=",
+"date" : "30/10/22",
+"email" : "villuatr@vous.fr",
+"boulangerie" : [
+{"stuff": "pain", "price": "1.9"},
+{"stuff": "baguette", "price":"1"},
+{"stuff": "pain de campagne", "price":"2.1"}
+],
+"patisserie":[
+{"stuff": "tartelette", "price":"2.55"},
+{"stuff": "tarte", "price":"8.36"}
+],
+"viennoiserie":[
+{"stuff": "croissant", "price":"1"},
+{"stuff": "pain au chocolat", "price":"1.1"}
+]
+})
+
+https://www.youtube.com/playlist?list=PLiXQZWEbJZMqNbFuToYf-A4vntjxN1G6A
+
+** deleteOne
+db.maebs.deleteOne({"_id" : ObjectId("639cb55bd086f8454a34ec11")})
+
+
+*** findOne
+db.maebs.findOne({"_id" : ObjectId("639cb55bd086f8454a34ec11"),"reserved": { $elemMatch: { "pour": "17/12"}}})
+
+db.maebs.findOne({"_id" : ObjectId("63b95c049e086d1447544569")})
+
+*** updateOne
+db.maebs.updateOne({"_id" : ObjectId("63b95c049e086d1447544569")},{ $set:{"cotisation" : "ajour"}})
+
+
+*** $INC
+db.maebs.updateOne({"_id" : ObjectId("634e3ecb92a32da9825a8f07")},{ $inc:{"total_reserve":+1}})
+
+*** $UNSET
+db.maebs.updateOne({"_id" : ObjectId("63b95c049e086d1447544569")}},{ $unset: {"patisserie.[0].stuff":{$ne:"chouquette"}}})
+
+db.maebs.updateOne({"_id" : ObjectId("639cb55bd086f8454a34ec11")},{ $unset: {"reserved":{"pour":"17/12"}}})
+
+** $PULL
+db.maebs.updateOne({"_id" : ObjectId("63b95c049e086d1447544569")},{ $pull: {"reserved":{"pour":"5/1"}}})
+db.maebs.findOne({"_id" : ObjectId("639cb55bd086f8454a34ec11")})
+
+**$SET
+db.maebs.updateOne({"_id" : ObjectId("63b95c049e086d1447544569")},{$set:{"urlImg": "http://127.0.0.6:5006/maeb/photo-maeb/boul-hero-standard.jpg"}})
+
+63b95c049e086d1447544569
+
+db.maebs.updateOne({"_id" : ObjectId("63b95c049e086d1447544569")},{ $push: {"reserved":{"pain de campagne" : "1","pain aux amandes" : "4","pour" : "7/1/2023"}}})
+{"pain de campagne" : "3","pain" : "2","pour" : "6/1"}
